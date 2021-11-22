@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface VacunaRepository extends MongoRepository <Vacuna, Integer>{
-    List<Vacuna> findByPerson (Integer idPersona);
+    List<Vacuna> findByIdPersona (Integer idPersona);
 }

@@ -35,7 +35,7 @@ public class ContagioController {
         if (afiliado == null)
             throw new AfiliadoNotFoundException("No se encontró un afiliado con identifiación: " + identificacion);
 
-        List<Contagio> contagios = contagioRepository.findByPerson(identificacion);
+        List<Contagio> contagios = contagioRepository.findByIdPersona(identificacion);
         return contagios;
     }
 

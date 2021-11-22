@@ -35,7 +35,7 @@ public class VacunaController {
         if (afiliado == null)
             throw new AfiliadoNotFoundException("No se encontró un afiliado con identifiación: " + identificacion);
 
-        List<Vacuna> vacunas = vacunaRepository.findByPerson(identificacion);
+        List<Vacuna> vacunas = vacunaRepository.findByIdPersona(identificacion);
         return vacunas;
     }
 

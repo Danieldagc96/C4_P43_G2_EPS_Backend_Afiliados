@@ -19,7 +19,7 @@ public class ContagioController {
         this.contagioRepository = contagioRepository;
     }
 
-    @PostMapping("/contagio/crear")
+    @PostMapping("/crearContagio")
     Contagio newContagio (@RequestBody Contagio contagio){
         Afiliado afiliado = afiliadoRepository.findById(contagio.getIdPersona()).orElse(null);
 

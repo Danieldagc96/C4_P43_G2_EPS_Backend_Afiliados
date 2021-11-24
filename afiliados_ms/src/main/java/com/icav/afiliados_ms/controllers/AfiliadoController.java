@@ -13,12 +13,12 @@ public class AfiliadoController {
         this.afiliadoRepository = afiliadoRepository;
     }
 
-    @GetMapping("/afiliado/{identificacion}")
+    @GetMapping("/mostrarAfiliado/{identificacion}")
     Afiliado getAfiliado(@PathVariable Integer identificacion){
         return afiliadoRepository.findById(identificacion).orElseThrow(() -> new AfiliadoNotFoundException("No se encontró un afiliado con identifiación: " + identificacion));
     }
 
-    @PostMapping("/afiliado/crear")
+    @PostMapping("/crearAfiliado")
     Afiliado newAfiliado(@RequestBody Afiliado afiliado) {
         return afiliadoRepository.save(afiliado);
     }

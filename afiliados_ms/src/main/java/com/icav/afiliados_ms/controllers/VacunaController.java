@@ -19,7 +19,7 @@ public class VacunaController {
         this.vacunaRepository = vacunaRepository;
     }
 
-    @PostMapping("/vacuna/crear")
+    @PostMapping("/crearVacuna")
     Vacuna newVacuna (@RequestBody Vacuna vacuna){
         Afiliado afiliado = afiliadoRepository.findById(vacuna.getIdPersona()).orElse(null);
 

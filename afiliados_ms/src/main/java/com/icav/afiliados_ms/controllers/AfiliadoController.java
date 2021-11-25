@@ -24,9 +24,14 @@ public class AfiliadoController {
 
     @PostMapping("/crearAfiliado")
     Afiliado newAfiliado(@RequestBody Afiliado afiliado) {
+
+        if(afiliado.getIdentificacion() == null)
+            throw new IdDupliclateException("No se envio un Id - o json vacio");
+
         Afiliado exists = afiliadoRepository.findById(afiliado.getIdentificacion()).orElse(null);
         if(exists != null)
-            throw new IdDupliclateException("El usuario " + afiliado.getIdentificacion()+" ya existe no se puede crear");
+            throw new IdDupliclateException("El afiliado " + afiliado.getIdentificacion()+" ya existe no se puede crear");
+
         return afiliadoRepository.save(afiliado);
     }
 
@@ -40,5 +45,17 @@ public class AfiliadoController {
         response.put("Eliminado", Boolean.TRUE);
         System.out.println(response);
         return response;
+    }
+
+    @PutMapping("/modificarAfiliado")
+    Afiliado modificarAfiliado(@RequestBody Afiliado afiliado) {
+
+        if(afiliado.getIdentificacion() == null)
+            throw new IdDupliclateException("No se envio un Id - o json vacio");
+
+        Afiliado exists = afiliadoRepository.findById(afiliado.getIdentificacion()).orElse(null);
+        if(exists == null)
+            throw new IdDupliclateException("El afiliado " + afiliado.getIdentificacion()+" no existe");
+        return afiliadoRepository.save(afiliado);
     }
 }

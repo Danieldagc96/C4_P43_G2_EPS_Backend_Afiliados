@@ -1,6 +1,7 @@
 package com.icav.afiliados_ms.controllers;
 
 import com.icav.afiliados_ms.exceptions.AfiliadoNotFoundException;
+import com.icav.afiliados_ms.exceptions.IdDupliclateException;
 import com.icav.afiliados_ms.models.Afiliado;
 import com.icav.afiliados_ms.models.Vacuna;
 import com.icav.afiliados_ms.repositories.AfiliadoRepository;
@@ -21,6 +22,10 @@ public class VacunaController {
 
     @PostMapping("/crearVacuna")
     Vacuna newVacuna (@RequestBody Vacuna vacuna){
+
+        if(vacuna.getIdPersona() == null)
+            throw new IdDupliclateException("No se envio un IdPersona - o json vacio");
+
         Afiliado afiliado = afiliadoRepository.findById(vacuna.getIdPersona()).orElse(null);
 
         if (afiliado == null)
@@ -38,5 +43,4 @@ public class VacunaController {
         List<Vacuna> vacunas = vacunaRepository.findByIdPersona(identificacion);
         return vacunas;
     }
-
 }

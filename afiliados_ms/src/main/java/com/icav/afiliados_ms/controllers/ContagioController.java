@@ -1,6 +1,7 @@
 package com.icav.afiliados_ms.controllers;
 
 import com.icav.afiliados_ms.exceptions.AfiliadoNotFoundException;
+import com.icav.afiliados_ms.exceptions.IdDupliclateException;
 import com.icav.afiliados_ms.models.Afiliado;
 import com.icav.afiliados_ms.models.Contagio;
 import com.icav.afiliados_ms.repositories.AfiliadoRepository;
@@ -21,6 +22,10 @@ public class ContagioController {
 
     @PostMapping("/crearContagio")
     Contagio newContagio (@RequestBody Contagio contagio){
+
+        if(contagio.getIdPersona() == null)
+            throw new IdDupliclateException("No se envio un IdPersona - o json vacio");
+
         Afiliado afiliado = afiliadoRepository.findById(contagio.getIdPersona()).orElse(null);
 
         if (afiliado == null)

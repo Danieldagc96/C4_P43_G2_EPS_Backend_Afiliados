@@ -5,29 +5,19 @@ import org.springframework.data.annotation.Id;
 import java.util.Date;
 
 public class Vacuna {
-    @Id
-    private Integer id;
+
     private Integer idPersona;
     private String fabricante;
     private Integer lote;
     private Integer dosis;
     private Date fechaAplicacion;
 
-    public Vacuna(Integer id, Integer idPersona, String fabricante, Integer lote, Integer dosis, Date fechaAplicacion) {
-        this.id = id;
+    public Vacuna(Integer idPersona, String fabricante, Integer lote, Integer dosis, Date fechaAplicacion) {
         this.idPersona = idPersona;
         this.fabricante = fabricante;
         this.lote = lote;
         this.dosis = dosis;
         this.fechaAplicacion = fechaAplicacion;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getIdPersona() {

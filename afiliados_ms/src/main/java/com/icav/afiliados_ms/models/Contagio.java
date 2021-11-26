@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import java.util.Date;
 
 public class Contagio {
-    @Id
-    private Integer id;
     private Integer idPersona;
     private Date fechaDiagnostico;
     private String estadoEnfermedad;
@@ -15,8 +13,7 @@ public class Contagio {
     private Date fechaRecuperacion;
     private Date fechaMuerte;
 
-    public Contagio(Integer id, Integer idPersona, Date fechaDiagnostico, String estadoEnfermedad, String ubicacionCaso, String estadoRecuperacion, Date fechaRecuperacion, Date fechaMuerte) {
-        this.id = id;
+    public Contagio(Integer idPersona, Date fechaDiagnostico, String estadoEnfermedad, String ubicacionCaso, String estadoRecuperacion, Date fechaRecuperacion, Date fechaMuerte) {
         this.idPersona = idPersona;
         this.fechaDiagnostico = fechaDiagnostico;
         this.estadoEnfermedad = estadoEnfermedad;
@@ -24,14 +21,6 @@ public class Contagio {
         this.estadoRecuperacion = estadoRecuperacion;
         this.fechaRecuperacion = fechaRecuperacion;
         this.fechaMuerte = fechaMuerte;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getIdPersona() {

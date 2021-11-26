@@ -3,10 +3,12 @@ package com.icav.afiliados_ms.controllers;
 import com.icav.afiliados_ms.exceptions.AfiliadoNotFoundException;
 import com.icav.afiliados_ms.exceptions.IdDupliclateException;
 import com.icav.afiliados_ms.models.Afiliado;
+import com.icav.afiliados_ms.models.Contagio;
 import com.icav.afiliados_ms.repositories.AfiliadoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,6 +22,12 @@ public class AfiliadoController {
     @GetMapping("/mostrarAfiliado/{identificacion}")
     Afiliado getAfiliado(@PathVariable Integer identificacion) {
         return afiliadoRepository.findById(identificacion).orElseThrow(() -> new AfiliadoNotFoundException("No se encontró un afiliado con identifiación: " + identificacion));
+    }
+    @GetMapping("/mostrarTodosAfiliados")
+    List<Afiliado> listarContagiosAfiliado(){
+
+        List<Afiliado> afiliados = afiliadoRepository.findAll();
+        return afiliados;
     }
 
     @PostMapping("/crearAfiliado")
@@ -56,6 +64,11 @@ public class AfiliadoController {
         Afiliado exists = afiliadoRepository.findById(afiliado.getIdentificacion()).orElse(null);
         if(exists == null)
             throw new IdDupliclateException("El afiliado " + afiliado.getIdentificacion()+" no existe");
-        return afiliadoRepository.save(afiliado);
+
+        if(afiliado.getCorreo() != null)
+            exists.setCorreo(afiliado.getCorreo());
+        if(afiliado.getDireccion() != null)
+            exists.setDireccion(afiliado.getDireccion());
+        return afiliadoRepository.save(exists);
     }
 }
